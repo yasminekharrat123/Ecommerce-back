@@ -3,6 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProduitModule } from './produit/produit.module';
+import { FavorisModule } from './favoris/favoris.module';
+import { PanierModule } from './panier/panier.module';
 
 @Module({
   imports: [
@@ -18,6 +20,8 @@ import { ProduitModule } from './produit/produit.module';
       autoLoadEntities: true,
     }),
     ProduitModule,
+    FavorisModule,
+    PanierModule,
   ],
   controllers: [AppController],
   providers: [AppService],
