@@ -33,7 +33,7 @@ export class ProduitService {
     return produit;
   }
 
-  async deleteCv(id: number) {
+  async deleteProduit(id: number) {
     return await this.ProduitRepository.delete(id);
   }
 
