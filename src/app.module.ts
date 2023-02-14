@@ -15,7 +15,7 @@ import { PanierModule } from './panier/panier.module';
       username: 'root',
       password: '',
       database: 'ecommerce',
-      entities: ['dist/**/*.entity{.ts,.js}', 'src/**/*.entity{.ts,.js}'],
+      entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
       autoLoadEntities: true,
     }),
