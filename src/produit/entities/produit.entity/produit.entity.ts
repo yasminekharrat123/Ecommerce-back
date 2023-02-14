@@ -1,8 +1,12 @@
-import { TimestampEntites } from 'src/Generics/timestamp.entites.';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { ProduitCommandeEntity } from './../../../ProduitCommande/entities/ProduitCommande.entity';
+
+
+
+import { TimestampEntities } from '../../Generics/timestamp.entities';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'produit', schema: 'public' })
-export class ProduitEntity extends TimestampEntites {
+export class ProduitEntity extends TimestampEntities {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,4 +24,7 @@ export class ProduitEntity extends TimestampEntites {
 
   @Column({ type: 'int' })
   quantite: number;
+
+  @OneToMany(()=>ProduitCommandeEntity, (pro_coms)=>pro_coms.produit)
+  pro_coms: ProduitCommandeEntity[];
 }
