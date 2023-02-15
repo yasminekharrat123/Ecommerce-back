@@ -1,3 +1,5 @@
+import { ProduitCommandeModule } from './ProduitCommande/ProduitCommande.module';
+import { CommandeModule } from './Commande/commande.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -17,7 +19,7 @@ import { ProduitModule } from './produit/produit.module';
       synchronize: true,
       autoLoadEntities: true,
     }),
-    ProduitModule,
+    ProduitModule, CommandeModule, ProduitCommandeModule
   ],
   controllers: [AppController],
   providers: [AppService],
