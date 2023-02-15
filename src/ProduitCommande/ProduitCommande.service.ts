@@ -26,4 +26,24 @@ export class ProduitCommandeService {
         };
         return await this.ProduitCommandeRepository.save(newPC);
     }
+
+    async updateProduitCommande(id:number,state:string)
+    {
+        // const qb=this.ProduitCommandeRepository.createQueryBuilder("produit_commande");
+        // qb.update()
+        // .set({etat:state})
+        // .where("produit_commande.id = :id")
+        // .setParameters({id})
+        // .from(ProduitCommandeEntity, "produit_commande");   
+        
+        // const ex=await qb.execute()
+        // console.log(qb.getSql());
+        // return ex;
+        const query = `
+                UPDATE produit_commande
+                SET etat = ?
+                where id = ?
+                `;
+        return await this.ProduitCommandeRepository.query(query,[state,id]);
+    }
 }
