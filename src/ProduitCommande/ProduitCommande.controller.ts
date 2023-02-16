@@ -1,3 +1,4 @@
+import { UpdateProduitCommandeDTO } from './dto/updatePC.dto';
 import { addProduitDto } from './../produit/dto/add-produit.dto';
 import { ProduitCommandeService } from './ProduitCommande.service';
 import { ProduitService } from './../produit/produit.service';
@@ -6,19 +7,19 @@ import { AddProduitCommandeDTO } from './dto/addPC.dto';
 @Controller('ProduitCommande')
 export class ProduitCommandeController {
     constructor(private ProduitCommandeService:ProduitCommandeService){}
-    @Post()
-    async addProduitCommande(
-        // @Body() newPC: AddProduitCommandeDTO
-    )
-    {
-        return await this.ProduitCommandeService.AddProduitCommande();
-    }
+    // @Post()
+    // async addProduitCommande(
+    //     // @Body() newPC: AddProduitCommandeDTO
+    // )
+    // {
+    //     return await this.ProduitCommandeService.AddProduitCommande();
+    // }
     @Patch(':id')
     async updateProduitCommande(
         @Param('id',ParseIntPipe) id:number, 
-        @Body('state') state:string
+        @Body() UpdateProduitCommandeDTO:UpdateProduitCommandeDTO
     )
     {
-        return await this.ProduitCommandeService.updateProduitCommande(id,state);
+        return await this.ProduitCommandeService.updateProduitCommande(id,UpdateProduitCommandeDTO.etat);
     }
 }

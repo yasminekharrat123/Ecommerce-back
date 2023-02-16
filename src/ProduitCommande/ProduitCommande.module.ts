@@ -7,11 +7,13 @@ import { ProduitCommandeController } from './ProduitCommande.controller';
 
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AddProduitCommandeDTO } from './dto/addPC.dto';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ProduitCommandeEntity]),ProduitModule,CommandeModule],
+  imports: [TypeOrmModule.forFeature([ProduitCommandeEntity])],
   controllers: [ProduitCommandeController],
   providers: [ProduitCommandeService],
+  exports: [ProduitCommandeService]
 })
 export class ProduitCommandeModule {}

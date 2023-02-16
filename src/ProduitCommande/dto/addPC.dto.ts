@@ -7,9 +7,9 @@ export class AddProduitCommandeDTO
 {
 
     @IsNotEmpty()
-    produit:ProduitEntity;
-    @IsNotEmpty()
-    commande:CommandeEntity;
+    @Type(()=>Number)
+    @IsNumber()
+    idProduit:number
     @Type(()=>Number)
     @IsNumber()
     @Min(1)
