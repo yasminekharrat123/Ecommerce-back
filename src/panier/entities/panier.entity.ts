@@ -1,20 +1,25 @@
+import { ClientEntity } from 'src/client/entities/client.entity';
 import { ProduitEntity } from 'src/produit/entities/produit.entity/produit.entity';
-import { Entity, JoinTable, ManyToMany, OneToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { ProduitPanierEntity } from './produitPanier.entity';
 
 @Entity({ name: 'panier', schema: 'public' })
 export class PanierEntity {
-  @ManyToMany(() => ProduitEntity, (produit) => produit.panier, {
+  @PrimaryGeneratedColumn()
+  id: number;
+  @ManyToMany(() => ProduitPanierEntity, {
     cascade: true,
     nullable: true,
     eager: true,
   })
   @JoinTable()
-  produits: ProduitEntity[];
-
-  @OneToMany(() => ClientEntity, (client) => client.panier, {
-    cascade: true,
-    nullable: false,
-    eager: true,
-  })
-  client: ClientEntity;
+  produitsPanier: ProduitPanierEntity[];
 }

@@ -32,32 +32,11 @@ export class ProduitEntity extends TimestampEntities {
   @Column({ type: 'int' })
   quantite: number;
 
-  @OneToMany(() => ProduitCommandeEntity, (pro_coms) => pro_coms.produit)
-  pro_coms: ProduitCommandeEntity[];
-
-  @ManyToMany(() => FavorisEntity, {
-    cascade: true,
-    nullable: true,
-    eager: true,
-  })
+  @ManyToMany(() => FavorisEntity)
   @JoinTable()
   favoris: FavorisEntity[];
 
-  @ManyToMany(() => PanierEntity, {
-    cascade: true,
-    nullable: true,
-    eager: true,
-  })
-  @JoinTable({
-    name: 'produits dans panier',
-    joinColumn: {
-      name: 'produit_id',
-      referencedColumnName: 'id',
-    },
-    inverseJoinColumn: {
-      name: 'panier_id',
-      referencedColumnName: 'id',
-    },
-  })
+  @ManyToMany(() => PanierEntity)
+  @JoinTable()
   panier: PanierEntity[];
 }
