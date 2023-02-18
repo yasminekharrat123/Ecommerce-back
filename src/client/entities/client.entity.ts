@@ -33,8 +33,4 @@ export class ClientEntity {
   @OneToOne(() => FavorisEntity)
   @JoinColumn()
   favoris: FavorisEntity;
-
-  @OneToOne(() => PanierEntity)
-  @JoinColumn()
-  panier: PanierEntity;
 }
