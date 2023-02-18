@@ -1,8 +1,23 @@
+import { IsNotEmpty, IsString } from 'class-validator';
 
-export class AddCommercantDto{
-    name:string;
-    email:string;
-    password:string;
-    serviceName: string;
-    image : Buffer;
+export class AddCommercantDto {
+  @IsString()
+  @IsNotEmpty()
+  name: string;
+
+  @IsString()
+  @IsNotEmpty()
+  email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  password: string;
+
+  @IsString()
+  @IsNotEmpty()
+  NomService: string;
+
+  @IsString()
+  @IsNotEmpty()
+  image: Buffer;
 }

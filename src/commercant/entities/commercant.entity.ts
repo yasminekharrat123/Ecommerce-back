@@ -1,24 +1,33 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { TimestampEntities } from 'src/produit/Generics/timestamp.entities';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  JoinColumn,
+  OneToOne,
+} from 'typeorm';
 
+@Entity({ name: 'commercant', schema: 'public' })
+export class CommercantEntity extends TimestampEntities {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-@Entity({ name: 'client', schema: 'public' })
-export class commercant{
+  @Column()
+  name: string;
 
-    @PrimaryGeneratedColumn()
-    idCommercant: number;
+  @Column()
+  email: string;
 
-    @Column()
-    name: string;
+  @Column()
+  password: string;
 
-    @Column()
-    email: string;
+  @Column({ type: 'bytea', nullable: true })
+  image: Buffer;
 
-    @Column()
-    password: string;
-
-    @Column({ type: 'bytea', nullable: true })
-    image: Buffer;
-
-    @Column()
-    serviceName: string;
+  @Column()
+  NomService: string;
+  /*
+  @OneToOne(() => PanierEntity)
+  @JoinColumn()
+  panier: PanierEntity;*/
 }

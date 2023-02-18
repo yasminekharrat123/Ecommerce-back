@@ -1,3 +1,4 @@
+import { TimestampEntities } from 'src/produit/Generics/timestamp.entities';
 import {
   Entity,
   Column,
@@ -7,9 +8,9 @@ import {
 } from 'typeorm';
 
 @Entity({ name: 'client', schema: 'public' })
-export class client {
+export class ClientEntity extends TimestampEntities {
   @PrimaryGeneratedColumn()
-  idClient: number;
+  id: number;
 
   @Column()
   name: string;
@@ -23,14 +24,15 @@ export class client {
   @Column()
   password: string;
 
-  @Column({ type: 'bytea', nullable: true })
-  image: Buffer;
+  @Column({ nullable: true })
+  image: string;
 
+  /*
   @OneToOne(() => FavorisEntity)
   @JoinColumn()
   favoris: FavorisEntity;
 
   @OneToOne(() => PanierEntity)
   @JoinColumn()
-  panier: PanierEntity;
+  panier: PanierEntity;*/
 }
