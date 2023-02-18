@@ -26,7 +26,6 @@ export class FavorisController {
     @Query('idProduit', ParseIntPipe) idProduit: number,
     @Req() req: Request,
   ) {
-    console.log(req);
     console.log('idClient:', idClient);
     console.log('idProduit:', idProduit);
     return this.favorisservice.addToFavoris(idClient, idProduit);

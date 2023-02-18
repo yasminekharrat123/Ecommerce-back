@@ -22,21 +22,21 @@ export class FavorisService {
   ): Promise<FavorisEntity> {
     const client = await this.clientRepository.findOne({
       where: { id: clientId },
-      relations: ['favoris'],
+      relations: ['favoris', 'favoris.produits'],
     });
     if (!client) {
       throw new NotFoundException(`Le client n'existe pas`);
     }
+    console.log(`client: ${JSON.stringify(client)}`);
+
     const produit = await this.produitRepository.findOne({
       where: { id: produitId },
     });
+    console.log(`produit: ${JSON.stringify(produit)}`);
     if (!produit) {
       throw new NotFoundException(`Le produit n'existe pas`);
     }
 
-    if (client.favoris.produits.includes(produit)) {
-      throw new NotFoundException(`Le produit existe déjà`);
-    }
     const Favoris = client.favoris;
     if (!Favoris) {
       const Favoris = await this.createFavoris(client);
@@ -44,6 +44,12 @@ export class FavorisService {
       await this.favorisRepository.save(Favoris);
       client.favoris = Favoris;
     } else {
+      if (
+        client.favoris &&
+        client.favoris.produits.some((p) => p.id === produitId)
+      ) {
+        throw new NotFoundException(`Le produit existe déjà`);
+      }
       Favoris.produits.push(produit);
       await this.favorisRepository.save(Favoris);
       client.favoris = Favoris;
