@@ -1,7 +1,5 @@
 import { ProduitCommandeEntity } from './../../../ProduitCommande/entities/ProduitCommande.entity';
 
-
-
 import { TimestampEntities } from '../../Generics/timestamp.entities';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -24,7 +22,4 @@ export class ProduitEntity extends TimestampEntities {
 
   @Column({ type: 'int' })
   quantite: number;
-
-  @OneToMany(()=>ProduitCommandeEntity, (pro_coms)=>pro_coms.produit)
-  pro_coms: ProduitCommandeEntity[];
 }
