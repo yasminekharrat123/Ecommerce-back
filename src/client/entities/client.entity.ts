@@ -1,3 +1,4 @@
+import { FavorisEntity } from 'src/favoris/entities/favoris.entity';
 import { ProduitPanierEntity } from 'src/produit-panier/entities/produit-panier.entity';
 import { TimestampEntities } from 'src/produit/Generics/timestamp.entities';
 import {
@@ -31,12 +32,8 @@ export class ClientEntity extends TimestampEntities {
 
   @OneToMany(() => ProduitPanierEntity, (ProduitPanier) => ProduitPanier.client)
   Panier: ProduitPanierEntity[];
-  /*
+
   @OneToOne(() => FavorisEntity)
   @JoinColumn()
   favoris: FavorisEntity;
-
-  @OneToOne(() => PanierEntity)
-  @JoinColumn()
-  panier: PanierEntity;*/
 }
