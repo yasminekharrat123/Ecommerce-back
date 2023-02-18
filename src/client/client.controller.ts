@@ -25,16 +25,24 @@ export class ClientController {
     return this.clientService.addClient(AddClientDto);
   }
 
-  @Get('/:id')
+  @Get()
   getClientById(@Query('id', ParseIntPipe) id: number) {
     return this.clientService.getClientById(id);
   }
 
-  @Put('/:id')
+  @Put()
   async updateClient(
     @Query('id', ParseIntPipe) id: number,
     @Body() newClient: Partial<AddClientDto>,
   ) {
     return this.clientService.updateClient(id, newClient);
+  }
+
+  @Post('addtopanier')
+  async addToPanier(
+    @Query('idClient', ParseIntPipe) idClient: number,
+    @Query('idProduit', ParseIntPipe) idProduit: number,
+  ) {
+    return this.clientService.addtoPanier(idClient, idProduit);
   }
 }

@@ -1,3 +1,4 @@
+import { ProduitPanierEntity } from 'src/produit-panier/entities/produit-panier.entity';
 import { TimestampEntities } from 'src/produit/Generics/timestamp.entities';
 import {
   Entity,
@@ -5,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   JoinColumn,
   OneToOne,
+  OneToMany,
 } from 'typeorm';
 
 @Entity({ name: 'client', schema: 'public' })
@@ -27,6 +29,8 @@ export class ClientEntity extends TimestampEntities {
   @Column({ nullable: true })
   image: string;
 
+  @OneToMany(() => ProduitPanierEntity, (ProduitPanier) => ProduitPanier.client)
+  Panier: ProduitPanierEntity[];
   /*
   @OneToOne(() => FavorisEntity)
   @JoinColumn()
