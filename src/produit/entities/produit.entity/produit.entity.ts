@@ -32,11 +32,9 @@ export class ProduitEntity extends TimestampEntities {
   @Column({ type: 'int' })
   quantite: number;
 
+
   @ManyToMany(() => FavorisEntity)
   @JoinTable()
   favoris: FavorisEntity[];
 
-  @ManyToMany(() => PanierEntity)
-  @JoinTable()
-  panier: PanierEntity[];
 }
