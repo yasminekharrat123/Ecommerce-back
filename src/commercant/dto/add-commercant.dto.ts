@@ -19,5 +19,5 @@ export class AddCommercantDto {
 
   @IsString()
   @IsNotEmpty()
-  image: Buffer;
+  image: string;
 }

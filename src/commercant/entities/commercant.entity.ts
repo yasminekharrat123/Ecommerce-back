@@ -21,8 +21,8 @@ export class CommercantEntity extends TimestampEntities {
   @Column()
   password: string;
 
-  @Column({ type: 'bytea', nullable: true })
-  image: Buffer;
+  @Column({ nullable: true })
+  image: string;
 
   @Column()
   NomService: string;
