@@ -1,3 +1,4 @@
+import { ClientService } from './../client/client.service';
 import { ProduitService } from './../produit/produit.service';
 import { ProduitCommandeService } from './../ProduitCommande/ProduitCommande.service';
 import { AddCommandeDTO } from './dto/addCommande.dto';
@@ -12,24 +13,35 @@ export class CommandeService {
         private CommandeRepository: Repository<CommandeEntity>,
         private ProduitCommandeService: ProduitCommandeService,
         private ProduitService: ProduitService,
+        private ClientService : ClientService
     ){}
 
     async addCommande(newCommande:AddCommandeDTO)
     {
+       
+        const newCommClient=await this.ClientService.getClientById(newCommande.idClient);
+       
         const CommandeRow = 
         {
-          idClient:newCommande.idClient,
+          client : newCommClient
         }
         const Commande= await this.CommandeRepository.save(CommandeRow);
-        newCommande.products.forEach( async (element) =>{
-        const newPC={
-            quantite: element.quantite,
-            commande: Commande,
-            produit:  await this.ProduitService.findProduitById(element.idProduit),
-        };
+
         
-           await this.ProduitCommandeService.AddProduitCommande(newPC)
-        })
+          newCommande.products.forEach( async (element) =>{
+                const produit= await this.ProduitService.findProduitById(element.idProduit);
+                const newPC={
+                  quantite: element.quantite,
+                  commande: Commande,
+                  produit
+              };
+              
+              await this.ProduitCommandeService.AddProduitCommande(newPC)
+            })
+
+ 
+      
+
         return Commande;
        
     }

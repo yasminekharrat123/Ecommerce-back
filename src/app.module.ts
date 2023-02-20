@@ -31,6 +31,7 @@ import { ProduitPanierModule } from './produit-panier/produit-panier.module';
     ClientModule,
     CommercantModule,
     ProduitPanierModule,
+    CommandeModule
 
   ],
   controllers: [AppController],

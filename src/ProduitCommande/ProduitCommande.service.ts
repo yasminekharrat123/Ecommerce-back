@@ -20,6 +20,16 @@ export class ProduitCommandeService {
         await this.ProduitCommandeRepository.save(newPC)
     }
 
+    async getProduitCommandeByCommercant(idComm:number)
+    {
+        const query = `
+            SELECT pc.* , p.*  FROM produit_commande pc
+            INNER JOIN produit p  ON p.id = pc.produitId
+            INNER JOIN commercant c ON c.id = p.commercantId
+            WHERE c.id = ?
+            `;
+        return await this.ProduitCommandeRepository.query(query,[idComm]);
+    }
     async updateProduitCommande(id:number,state:string)
     {
         const query = `

@@ -18,6 +18,5 @@ export class AddCommercantDto {
   NomService: string;
 
   @IsString()
-  @IsNotEmpty()
   image: string;
 }

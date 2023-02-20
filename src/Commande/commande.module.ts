@@ -1,3 +1,5 @@
+import { ClientModule } from './../client/client.module';
+
 import { ProduitService } from './../produit/produit.service';
 import { ProduitModule } from './../produit/produit.module';
 import { ProduitCommandeService } from './../ProduitCommande/ProduitCommande.service';
@@ -11,7 +13,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([CommandeEntity]),ProduitCommandeModule ,ProduitModule],
+  imports: [TypeOrmModule.forFeature([CommandeEntity]),ProduitCommandeModule ,ProduitModule,ClientModule],
   controllers: [CommandeController],
   providers: [CommandeService],
 })

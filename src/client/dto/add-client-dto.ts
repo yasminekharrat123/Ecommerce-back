@@ -14,10 +14,8 @@ export class AddClientDto {
   password: string;
 
   @IsString()
-  @IsNotEmpty()
   description: string;
 
   @IsString()
-  @IsNotEmpty()
   image: string;
 }

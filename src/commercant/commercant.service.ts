@@ -8,7 +8,7 @@ import { CommercantEntity } from './entities/commercant.entity';
 export class CommercantService {
   constructor(
     @InjectRepository(CommercantEntity)
-    private readonly commercantRepository: Repository<CommercantEntity>,
+    private  commercantRepository: Repository<CommercantEntity>,
   ) {}
 
   async addCommercant(commercant: AddCommercantDto): Promise<CommercantEntity> {

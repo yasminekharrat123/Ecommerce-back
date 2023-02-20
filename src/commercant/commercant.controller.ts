@@ -21,8 +21,8 @@ export class CommercantController {
     return this.commercantService.getCommercants();
   }
   @Post()
-  async addCommercant(@Body() AddCommercantDto: AddCommercantDto) {
-    return this.commercantService.addCommercant(AddCommercantDto);
+  async addCommercant(@Body() commercant: AddCommercantDto) {
+    return this.commercantService.addCommercant(commercant);
   }
 
   @Get('/:id')

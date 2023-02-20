@@ -1,3 +1,5 @@
+import { ManyToOne } from 'typeorm';
+import { CommercantEntity } from './../../../commercant/entities/commercant.entity';
 import { FavorisEntity } from 'src/favoris/entities/favoris.entity';
 import { ProduitCommandeEntity } from './../../../ProduitCommande/entities/ProduitCommande.entity';
 
@@ -31,6 +33,11 @@ export class ProduitEntity extends TimestampEntities {
   @Column({ type: 'int' })
   quantite: number;
 
+
+  @ManyToOne(()=> CommercantEntity)
+  commercant: CommercantEntity;
+
+  
   @ManyToMany(() => FavorisEntity)
   @JoinTable()
   favoris: FavorisEntity[];
