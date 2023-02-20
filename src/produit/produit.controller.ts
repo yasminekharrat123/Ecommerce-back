@@ -11,7 +11,7 @@ import { addProduitDto } from './dto/add-produit.dto';
 import { ProduitEntity } from './entities/produit.entity/produit.entity';
 import { ProduitService } from './produit.service';
 
-@Controller('BuyerCatalog')
+@Controller('Buyer')
 export class ProduitController {
   constructor(private produitservice: ProduitService) {}
 

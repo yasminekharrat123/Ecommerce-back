@@ -1,9 +1,15 @@
+import { FavorisEntity } from 'src/favoris/entities/favoris.entity';
 import { ProduitCommandeEntity } from './../../../ProduitCommande/entities/ProduitCommande.entity';
 
-
-
 import { TimestampEntities } from '../../Generics/timestamp.entities';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity({ name: 'produit', schema: 'public' })
 export class ProduitEntity extends TimestampEntities {
@@ -25,6 +31,7 @@ export class ProduitEntity extends TimestampEntities {
   @Column({ type: 'int' })
   quantite: number;
 
-  @OneToMany(()=>ProduitCommandeEntity, (pro_coms)=>pro_coms.produit)
-  pro_coms: ProduitCommandeEntity[];
+  @ManyToMany(() => FavorisEntity)
+  @JoinTable()
+  favoris: FavorisEntity[];
 }
