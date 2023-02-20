@@ -1,3 +1,5 @@
+import { ProduitCommandeModule } from './ProduitCommande/ProduitCommande.module';
+import { CommandeModule } from './Commande/commande.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -29,6 +31,7 @@ import { ProduitPanierModule } from './produit-panier/produit-panier.module';
     ClientModule,
     CommercantModule,
     ProduitPanierModule,
+    CommandeModule
 
   ],
   controllers: [AppController],

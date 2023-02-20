@@ -1,3 +1,4 @@
+import { CommercantService } from './../commercant/commercant.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -9,6 +10,7 @@ export class ProduitService {
   constructor(
     @InjectRepository(ProduitEntity)
     private ProduitRepository: Repository<ProduitEntity>,
+    private CommercantService: CommercantService,
   ) {}
 
   async getAllProduit(): Promise<ProduitEntity[]> {
@@ -16,7 +18,16 @@ export class ProduitService {
   }
 
   async addProduit(produit: addProduitDto): Promise<ProduitEntity> {
-    return await this.ProduitRepository.save(produit);
+    const commercant= await this.CommercantService.getCommercantById(produit.IdCommercant);
+    const newproduit={
+      commercant,
+      nom:produit.nom,
+      prix:produit.prix,
+      description:produit.description, 
+      image:produit.image,
+      quantite:produit.quantite, 
+    }
+    return await this.ProduitRepository.save(newproduit);
   }
 
   async removeProduit(id: number) {

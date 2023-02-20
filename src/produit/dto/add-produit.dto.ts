@@ -18,7 +18,7 @@ export class addProduitDto {
   @MaxLength(255)
   description: string;
 
-  @IsNotEmpty()
+
   @IsString()
   @MaxLength(255)
   image: string;
@@ -34,4 +34,9 @@ export class addProduitDto {
   @Type(() => Number)
   @Min(0)
   quantite: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  @Type(() => Number)
+  IdCommercant: number
 }
