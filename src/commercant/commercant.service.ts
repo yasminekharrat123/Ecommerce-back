@@ -1,8 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { UserEntity } from './../user/entities/user.entity';
+import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { AddCommercantDto } from './dto/add-commercant.dto';
+import { UpdateCommercantDto } from './dto/update-commercant.dto';
 import { CommercantEntity } from './entities/commercant.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class CommercantService {
@@ -11,8 +13,12 @@ export class CommercantService {
     private  commercantRepository: Repository<CommercantEntity>,
   ) {}
 
-  async addCommercant(commercant: AddCommercantDto): Promise<CommercantEntity> {
-    return await this.commercantRepository.save(commercant);
+  async RegisterCommercant(user:UserEntity,NomService:string): Promise<Partial<CommercantEntity>> {
+      const newCommercant={
+        user,
+        NomService
+      }
+      return await this.commercantRepository.save(newCommercant);
   }
 
   async getCommercants(): Promise<CommercantEntity[]> {
@@ -37,9 +43,9 @@ export class CommercantService {
     return await this.commercantRepository.restore(id);
   }
 
-  async updateCommercant(id: number, newCommercant: Partial<AddCommercantDto>) {
+  async updateCommercant(id: number, newCommercant: UpdateCommercantDto) {
     const commercant = await this.getCommercantById(id);
-    commercant.name = newCommercant.name ? newCommercant.name : commercant.name;
+    commercant.user.name = newCommercant.name ? newCommercant.name : commercant.user.name;
     commercant.image = newCommercant.image
       ? newCommercant.image
       : commercant.image;

@@ -1,3 +1,4 @@
+import { UpdateClientDTO } from './dto/update-client.dto';
 import {
   Body,
   Controller,
@@ -10,7 +11,7 @@ import {
   ParseIntPipe,
 } from '@nestjs/common';
 import { ClientService } from './client.service';
-import { AddClientDto } from './dto/add-client-dto';
+
 
 @Controller('client')
 export class ClientController {
@@ -19,10 +20,6 @@ export class ClientController {
   @Get()
   async getAllClients() {
     return this.clientService.getClients();
-  }
-  @Post()
-  async addClient(@Body() AddClientDto: AddClientDto) {
-    return this.clientService.addClient(AddClientDto);
   }
 
   @Get()
@@ -33,7 +30,7 @@ export class ClientController {
   @Put()
   async updateClient(
     @Query('id', ParseIntPipe) id: number,
-    @Body() newClient: Partial<AddClientDto>,
+    @Body() newClient: UpdateClientDTO,
   ) {
     return this.clientService.updateClient(id, newClient);
   }
