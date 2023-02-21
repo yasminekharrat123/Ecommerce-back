@@ -1,3 +1,4 @@
+import { UserEntity } from './../../user/entities/user.entity';
 import { CommandeEntity } from 'src/Commande/entities/commande.entity';
 import { FavorisEntity } from 'src/favoris/entities/favoris.entity';
 import { ProduitPanierEntity } from 'src/produit-panier/entities/produit-panier.entity';
@@ -16,17 +17,14 @@ export class ClientEntity extends TimestampEntities {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  name: string;
-
-  @Column()
-  email: string;
+  @OneToOne(() => UserEntity)
+  @JoinColumn()
+  user:UserEntity;
 
   @Column()
   description: string;
 
-  @Column()
-  password: string;
+
 
   @Column({ nullable: true })
   image: string;

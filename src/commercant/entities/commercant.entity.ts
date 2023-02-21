@@ -1,3 +1,4 @@
+import { UserEntity } from './../../user/entities/user.entity';
 import { TimestampEntities } from 'src/produit/Generics/timestamp.entities';
 import {
   Entity,
@@ -11,16 +12,10 @@ import {
 export class CommercantEntity extends TimestampEntities {
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Column()
-  name: string;
-
-  @Column()
-  email: string;
-
-  @Column()
-  password: string;
-
+  @OneToOne(()=>UserEntity)
+  @JoinColumn()
+  user: UserEntity;
+  
   @Column({ nullable: true })
   image: string;
 

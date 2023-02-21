@@ -1,12 +1,16 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { UpdateClientDTO } from './dto/update-client.dto';
+import { UserEntity } from './../user/entities/user.entity';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProduitEntity } from 'src/produit/entities/produit.entity/produit.entity';
 import { Repository } from 'typeorm';
-import { AddClientDto } from './dto/add-client-dto';
+
 import { ClientEntity } from './entities/client.entity';
 import pRetry from 'p-retry';
 import { ProduitPanierEntity } from 'src/produit-panier/entities/produit-panier.entity';
 import { CreateProduitPanierDto } from 'src/produit-panier/dto/create-produit-panier.dto';
+import * as bcrypt from 'bcrypt';
+
 @Injectable()
 export class ClientService {
   constructor(
@@ -17,10 +21,16 @@ export class ClientService {
     @InjectRepository(ProduitPanierEntity)
     private ProduitPanierRepository: Repository<ProduitPanierEntity>,
   ) {}
-
-  async addClient(client: AddClientDto): Promise<ClientEntity> {
-    return await this.clientRepository.save(client);
+  async RegisterClient(user:UserEntity){
+      const newClient =  {user};
+      const client= await this.clientRepository.save(newClient);
+     return {
+        id:client.id,
+        email:client.user.email,
+        name:client.user.name
+     }
   }
+
 
   async getClients(): Promise<ClientEntity[]> {
     return await this.clientRepository.find();
@@ -44,9 +54,9 @@ export class ClientService {
     return await this.clientRepository.restore(id);
   }
 
-  async updateClient(id: number, newClient: Partial<AddClientDto>) {
+  async updateClient(id: number, newClient: UpdateClientDTO) {
     const client = await this.getClientById(id);
-    client.name = newClient.name ? newClient.name : client.name;
+    client.user.name = newClient.name ? newClient.name : client.user.name;
     client.image = newClient.image ? newClient.image : client.image;
     client.description = newClient.description
       ? newClient.description

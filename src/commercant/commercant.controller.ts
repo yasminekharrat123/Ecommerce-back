@@ -8,7 +8,7 @@ import {
   NotFoundException,
   Query,
 } from '@nestjs/common';
-import { AddCommercantDto } from './dto/add-commercant.dto';
+import { UpdateCommercantDto } from './dto/update-commercant.dto';
 import { CommercantService } from './commercant.service';
 import { ParseIntPipe } from '@nestjs/common';
 
@@ -20,10 +20,10 @@ export class CommercantController {
   async getAllCommercants() {
     return this.commercantService.getCommercants();
   }
-  @Post()
-  async addCommercant(@Body() commercant: AddCommercantDto) {
-    return this.commercantService.addCommercant(commercant);
-  }
+  // @Post()
+  // async RegisterCommercant(@Body() commercant: AddCommercantDto) {
+  //   return this.commercantService.RegisterCommercant(commercant);
+  // }
 
   @Get('/:id')
   getCommercantById(@Query('id', ParseIntPipe) id: number) {
@@ -33,7 +33,7 @@ export class CommercantController {
   @Put('/:id')
   async updateCommercant(
     @Query('id', ParseIntPipe) id: number,
-    @Body() newCommercant: Partial<AddCommercantDto>,
+    @Body() newCommercant: UpdateCommercantDto,
   ) {
     return this.commercantService.updateCommercant(id, newCommercant);
   }
